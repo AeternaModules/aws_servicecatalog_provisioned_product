@@ -88,7 +88,7 @@ output "servicecatalog_provisioned_products_retain_physical_resources" {
 }
 output "servicecatalog_provisioned_products_stack_set_provisioning_preferences" {
   description = "Map of stack_set_provisioning_preferences values across all servicecatalog_provisioned_products, keyed the same as var.servicecatalog_provisioned_products"
-  value       = { for k, v in aws_servicecatalog_provisioned_product.servicecatalog_provisioned_products : k => v.stack_set_provisioning_preferences if v.stack_set_provisioning_preferences != null && length(v.stack_set_provisioning_preferences) > 0 }
+  value       = { for k, v in aws_servicecatalog_provisioned_product.servicecatalog_provisioned_products : k => one(v.stack_set_provisioning_preferences) if v.stack_set_provisioning_preferences != null && length(v.stack_set_provisioning_preferences) > 0 }
 }
 output "servicecatalog_provisioned_products_status" {
   description = "Map of status values across all servicecatalog_provisioned_products, keyed the same as var.servicecatalog_provisioned_products"
